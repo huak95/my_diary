@@ -20,6 +20,13 @@
 <body>
     <h1><a href="/">Saksorn Notes</a></h1>
     <h4><a href="admin"> Log In</a> </h4>
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li class="messsage">
+            {{ message }}
+        </li>
+    </ul>
     {% block content %}{% endblock %}
 
 </body>
