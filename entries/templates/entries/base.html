@@ -19,14 +19,20 @@
 
 <body>
     <h1><a href="/">Saksorn Notes</a></h1>
-    <h4><a href="admin"> Log In</a> </h4>
+    <h4>
+        <a href="admin"> Log In</a> | 
+        <a href="{% url 'admin:logout' %}">Logout</a>
+    </h4>
+    <hr>
     {% if messages %}
-    <ul class="messages">
+        <ul class="messages">
         {% for message in messages %}
-        <li class="messsage">
-            {{ message }}
-        </li>
-    </ul>
+            <li class="message">
+                {{ message }}
+            </li>
+        </ul>
+        {% endfor %}
+    {% endif %}
     {% block content %}{% endblock %}
 
 </body>

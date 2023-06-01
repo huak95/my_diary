@@ -12,6 +12,8 @@ from django.views.generic import (
 
 from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
+# Restrict access to your views
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .models import Entry
 
@@ -47,3 +49,11 @@ class EntryDeleteView(DeleteView):
     def delete(self, request, *args, **kwargs):
         messages.success(self.request, self.success_message)
         return super().delete(request, *args, **kwargs)
+    
+# LockedView
+class LockedView(LoginRequiredMixin):
+    login_url = "admin:login"
+
+class EntryLockedListView(LockedView, ListView):
+    model = Entry
+    queryset = Entry.objects.all().order_by('-date_created')
